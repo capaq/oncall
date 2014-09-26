@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="css/jquery.mobile.min.css" /> 
+<link rel="stylesheet" href="css/style.css" />
+
+<script src="js/jquery.min.js"></script> 
+<script src="js/jquery.mobile.min.js"></script> 
+
+</head>
+<body>
+
+<div data-role="page" id="page2" data-theme="a">
+	<div role="main" class="ui-content">
+	<!--Panel -->
+	<div data-role="panel" data-position-fixed="true" data-display="overlay" id="nav-panel">
+		<ul data-role="listview">
+			<li><a href="index.html" data-transition="slide" data-direction="reverse">Home</a></li>
+			<li><a href="today.html" >Today's Oncall</a></li>
+			<li><a href="dept.html" >Department Oncall</a></li>
+			<li><a href="#" >MyOncall</a></li>
+		</ul>
+	</div>
+	<!--End Panel -->	
+		<div data-role="header" data-position="fixed"><h1>Department's Oncall</h1>
+		<a href="#nav-panel" data-icon="bars" data-iconpos="notext">Menu</a></div>
+			<form id="form1">
+				<select name="dept" id="dept">
+					<option value="">Please Choose Department</option>
+					<option value="1">General Medical</option>
+					<option value="2">Endocrine</option>
+					<option value="3">General Surgical</option>
+				</select>
+				<input type="date" name="date" id="date">
+			</form>
+				<input type="submit" id="hantar1" value="Submit">
+	<script>
+	//$( document ).on("pageinit","#page2",function() {
+	  //Popup pengesahan
+	  $('#hantar1').click(function(){
+			//dept=$('#dept').val();
+			//no_kp=$('#no_kp').val();
+			//alamat=$('#alamat').val();
+			//negeri=$('#id_negeri').val();
+			//papar='Pinda '+dept+' dalam database.<br />';
+			//papar+='Nama : '+nama+'<br />No KP : '+no_kp;			
+			//$('#ubah').html(papar);
+			//$('#try_ajax').popup('open');
+			//$('#daftar_staff').prop('disabled', false);
+			$.ajax({
+			type: 'POST',
+			url: 'http://www.hpj.gov.my/droncall_server/logdate.php',
+			data: $("#form1").serialize(),
+			success: function(data){
+				//$.each(data, function(index, data) {
+       		//$('#ubah').append('<div class="ui-corner-all custom-corners"><div class="ui-bar ui-bar-b"><h3>'+data.rt+' ('+data.time+')</h3></div><div class="ui-body ui-body-b">'+data.name+'</div></div><br>');
+    //});
+				
+				$('#ubah1').show();
+				$('#ubah1').html(data);
+				//$('#try_ajax').popup('open');
+				
+				}
+			});	
+	  });
+	 //});
+
+	</script>		
+	<!-- popup untuk promp maklumat staff 
+	<div id="try_ajax" data-role="popup" data-dismissible="false" style="width:400px;">
+		<div data-role="header">
+			<h3>Hasil</h3>
+		</div>
+		<div role="main" class="ui-content">-->
+				<div id="ubah1">
+				</div>
+				<!--<a href="#" id="kembali" class="ui-btn ui-corner-all ui-shadow" data-rel="back">Kembali</a>
+			
+		</div>
+	</div>-->
+		<div data-role="footer" data-position="fixed"><small>Developed By IT Dept HPj</small></div>
+	</div><!-- /content -->
+
+</div><!-- /page -->
+
+
+</body>
+<html>
